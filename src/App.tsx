@@ -1,9 +1,5 @@
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import { theme, darkTheme } from './theme';
-import Router from "./Router";
-import { ReactQueryDevtools } from 'react-query/devtools'
-import { useState } from "react";
-
+import { createGlobalStyle } from "styled-components";
+import ToDoList from "./components/ToDoList";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -70,65 +66,12 @@ a {
 }
 `;
 
-const ToggleContainer = styled.div`
-  position: relative;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  cursor: pointer;
-
-  > .toggle-container {
-    width: 50px;
-    height: 24px;
-    border-radius: 30px;
-    background-color: rgb(233,233,234);}
-  > .toggle--checked {
-    background-color: rgb(0,200,102);
-    transition : 0.5s
-  }
-
-  > .toggle-circle {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: rgb(255,254,255);
-    transition : 0.5s
-  } >.toggle--checked {
-    left: 27px;
-    transition : 0.5s
-  }
-`;
-
-const Desc = styled.div`
-`;
-
 function App() {
-  const [initTheme, setInitTheme] = useState(theme)
-  const [isOn, setisOn] = useState(false);
-
-  const toggleHandler = () => {
-    setisOn(!isOn)
-    setInitTheme(initTheme === theme ? darkTheme : theme)
-  };
   return (
-    <ThemeProvider theme={initTheme}>
-       <>
-      <ToggleContainer
-        onClick={toggleHandler}
-      >
-        <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
-        <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
-      </ToggleContainer>
-    </>
+    <>
       <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </ThemeProvider>
-
-  )
+      <ToDoList />
+    </>
+  );
 }
-export default App
-
-
+export default App;
